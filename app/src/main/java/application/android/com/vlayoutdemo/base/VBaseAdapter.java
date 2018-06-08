@@ -9,6 +9,7 @@ import application.android.com.vlayoutdemo.event.OnItemClickListener;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
   public VBaseAdapter(Context context,int viewType) {
     mContext = context;
     this.viewType = viewType;
+    this.mDatas = new ArrayList<T>();
   }
 
   public VBaseAdapter(Context context,int viewType, List<T> mDatas, int mResLayout,
@@ -93,7 +95,7 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
   }
 
   /**
-   * 条w点击
+   * 子条目点击
    */
   public VBaseAdapter setOnItemChildClickListener(OnItemChildClickListener listener) {
     this.itemChildListener = listener;
@@ -101,10 +103,7 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
   }
 
   /**
-   * <br/> 方法名称: onCreateLayoutHelper
-   * <br/> 方法详述: 继承elegateAdapter.Adapter后重写方法，告知elegateAdapter.Adapter使用何种布局管理器
-   * <br/> 参数:
-   * <br/> 返回值:  VBaseAdapter
+   *  继承elegateAdapter.Adapter后重写方法，告知elegateAdapter.Adapter使用何种布局管理器
    */
   @Override public LayoutHelper onCreateLayoutHelper() {
     return mLayoutHelper;
@@ -112,12 +111,6 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
 
   public HashMap<Integer, Object> tags = new HashMap<>();
 
-  /**
-   * <br/> 方法名称: setTag
-   * <br/> 方法详述: 设置mObject
-   * <br/> 参数: mObject
-   * <br/> 返回值:  VBaseAdapter
-   */
   public VBaseAdapter setTag(int tag, Object mObject) {
     if (mObject != null) {
       tags.put(tag, mObject);
@@ -125,10 +118,6 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
     return this;
   }
 
-  /**
-   * <br/> 方法名称: onCreateViewHolder
-   * <br/> 方法详述: 解析布局文件，返回传入holder的构造器
-   */
   @Override public VBaseHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(mResLayout, parent, false);
     if (tags != null && tags.size() > 0) {
@@ -146,13 +135,6 @@ public class VBaseAdapter<T> extends DelegateAdapter.Adapter<VBaseHolder<T>> {
     }
     return null;
   }
-
-  /**
-   * <br/> 方法名称: onBindViewHolder
-   * <br/> 方法详述: 绑定数据
-   * <br/> 参数:
-   * <br/> 返回值:  VBaseAdapter
-   */
 
   @Override public void onBindViewHolder(VBaseHolder holder, int position) {
     holder.setOnItemClickListener(itemListener);

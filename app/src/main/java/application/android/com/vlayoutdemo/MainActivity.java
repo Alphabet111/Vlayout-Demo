@@ -21,7 +21,6 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     viewPool.setMaxRecycledViews(4,1);
     delegateAdapter = new DelegateAdapter(layoutManager, true);
 
-    headerAdapter = new VBaseAdapter<String>(this,1).setData(new ArrayList<String>())
+    headerAdapter = new VBaseAdapter<String>(this,1)
         .setLayout(R.layout.item_header)
         .setLayoutHelper(new SingleLayoutHelper())
         .setHolder(LocalDataHolder.class)
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
           }
         });
 
-    gridAdapter = new VBaseAdapter<CommonBean>(this,2).setData(new ArrayList<CommonBean>())
+    gridAdapter = new VBaseAdapter<CommonBean>(this,2)
         .setLayout(R.layout.item_grid)
         .setLayoutHelper(getGridLayoutHelper())
         .setHolder(GridHolder.class)
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
           }
         });
 
-    linearAdapter = new VBaseAdapter<CommonBean>(this,3).setData(new ArrayList<CommonBean>())
+    linearAdapter = new VBaseAdapter<CommonBean>(this,3)
         .setLayout(R.layout.item_linear)
         .setLayoutHelper(new LinearLayoutHelper())
         .setHolder(LinearHolder.class)
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
           }
         });
 
-    footerAdapter = new VBaseAdapter<String>(this,4).setData(new ArrayList<String>())
+    footerAdapter = new VBaseAdapter<String>(this,4)
         .setLayout(R.layout.item_footer)
         .setLayoutHelper(new SingleLayoutHelper())
         .setHolder(LocalDataHolder.class)
@@ -123,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
   @Override public void getGridDataSuccess(List<CommonBean> list) {
     gridAdapter.setData(list);
-    for(int i=0;i<delegateAdapter.getItemCount();i++){
-    }
   }
 
   @Override public void getLinearDataSuccess(List<CommonBean> list) {
